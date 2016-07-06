@@ -1,11 +1,12 @@
 #fapo button{
     background-color: #E8E8E8;
+    width: 100%;
 }
 #cl-tr {
     float:right;
 }
 #post {
     margin: 0px;
-    width: 400px;
-    height: 100px;"
+    width: 100%;
+    height: auto;
 }
