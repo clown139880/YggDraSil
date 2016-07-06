@@ -1,0 +1,26 @@
+<div class="media">
+  <div class="media-left media-middle">
+    <a href="{{ url_for('user', social_id=post.author.social_id)}}">
+      <img class="media-object" src="{{ post.author.avatar() }}" alt="..." width="64" height="64">
+    </a>
+  </div>
+  <div class="media-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            {% autoescape false %}
+            {{ _('%(nickname)s said %(when)s:', nickname = '<a href="%s">%s</a>' %(url_for('user', social_id=post.author.social_id), post.author.nickname), when=momentjs(post.timestamp).fromNow()) }}
+            {% endautoescape %}
+            {% if post.language != None and post.language != '' and post.language != g.locale %}
+            <div id="cl-tr"><span id="translation{{post.id}}">| <a href="javascript:translate('{{ post.language }}', '{{ g.locale }}', '#post{{ post.id }}', '#translation{{ post.id }}', '#loading{{ post.id }}');">{{ _('Translate') }}</a></span></div>
+            {% endif %}
+            {% if post.author.id == g.user.id %}
+            <div id="cl-tr"><a href="{{ url_for('delete', id=post.id)}}">{{ _('Delete ') }}</a></div>
+            {% endif %}
+        </div>
+        <div class="panel-body">
+            <img id="loading{{post.id}}" style="display: none" src="/static/img/loading.gif">
+          <strong><span id="post{{ post.id }}">{{ post.body }}</span></strong>
+        </div>
+      </div>
+  </div>
+</div>

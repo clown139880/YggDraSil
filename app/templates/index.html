@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+        <h1>{{_('Hello, %(name)s', name=g.user.nickname) }}!</h1>
+    </div></div>
+    <div class="row-fluid" >
+        <div class="span6" id="fapo">
+        <form action="" method="post" name="post">
+            {{ form.hidden_tag() }}
+            {% for error in form.post.errors %}
+          <div class="form-group">
+            <label for="">
+            <span sytle="color: red;">[{{ error }}]</span><br>
+            {% endfor %}</label>
+          </div>
+          <div class="form-group">
+            <label for="">{{_('say something')}}</label><br>
+            {{ form.post(size=30, maxlength=140) }}
+            <button type="submit" class="btn btn-default" value="Post!">{{_('post!')}}</button>
+          </div>
+
+        </form>
+    </div></div>
+        {% for post in posts.items %}
+            {% include 'posts.html' %}
+        {% endfor %}
+        <nav>
+            <ul class="pager">
+        {% if posts.has_prev %}<li class="previous"><a href="{{ url_for('index', page=posts.prev_num) }}"><span aria-hidden="true">&larr;</span> Newer Posts</a></li>{% else %}<li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Newer Posts</a></li>{% endif %} |
+        {% if posts.has_next %}<li class="next"><a href="{{ url_for('index', page=posts.next_num) }}">Older posts<span aria-hidden="true">&rarr;</span></a></li>{% else %}<li class="next disabled"><a href="{{ url_for('index', page=posts.next_num) }}">Older posts<span aria-hidden="true">&rarr;</span></a></li>{% endif %}
+            </ul>
+        </nav>
+{% endblock %}
