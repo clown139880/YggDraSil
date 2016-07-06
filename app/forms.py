@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, TextAreaField
+from wtforms import StringField, BooleanField, TextAreaField ，FileField
 from wtforms.validators import DataRequired, Length
 
 class LoginForm(Form):
@@ -12,7 +12,7 @@ class EditForm(Form):
 
 class PostForm(Form):
     post = TextAreaField('post', validators=[Length(min=0, max=140)])
-    image = FileField(u'Image File', [validators.regexp(u'^[^/\\]\.jpg$')])
+    image = FileField(u'Image File', validators=[regexp(u'^[^/\\]\.jpg$')])
     def validate_image(form, field):
         if field.data:
             field.data = re.sub(r'[^a-z0-9_.-]', '_', field.data)
