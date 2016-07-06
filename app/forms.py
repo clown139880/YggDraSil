@@ -12,10 +12,6 @@ class EditForm(Form):
 
 class PostForm(Form):
     post = TextAreaField('post', validators=[Length(min=0, max=140)])
-    image = FileField(u'Image File')
-    def validate_image(form, field):
-        if field.data:
-            field.data = re.sub(r'[^a-z0-9_.-]', '_', field.data)
 
 class SearchForm(Form):
     search = StringField('search', validators=[DataRequired()])
