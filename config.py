@@ -2,7 +2,6 @@
 # ...
 
 import os
-import sae.const
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 if os.environ.get('DATABASE_URL') is None:
